@@ -5,8 +5,8 @@ BEGIN
     declare dig1, dig2, dig3, dig4, dig5, dig6, dig7, dig8, dig9 int;
 
     set ans = '';
-    set dig9 = floor(n/100000000);
-    set dig8 = floor(n/10000000) - dig9*10;
+    set dig9 = floor(n/100000000)-(floor(n/1000000000)*10);
+    set dig8 = floor(n/10000000) -(floor(n/100000000)*10);
     set dig7 = floor(n/1000000) -(floor(n/10000000)*10);
     set dig6 = floor(n/100000) - (floor(n/1000000)*10);
     set dig5 = floor(n/10000) -  (floor(n/100000)*10);
@@ -14,6 +14,26 @@ BEGIN
     set dig3 = floor(n/100) -    (floor(n/1000)*10);
     set dig2 = floor(n/10) -     (floor(n/100)*10);
     set dig1 = n - (floor(n / 10)*10);
+    
+if dig8 > 0 and dig7 >=0 then
+        case
+            when dig8=1 then set ans=concat(ans, ' एक करोड');
+            when dig8=2 then set ans=concat(ans, ' दुइ करोड');
+            when dig8=3 then set ans=concat(ans, ' तिन करोड');
+            when dig8=4 then set ans=concat(ans, ' चार करोड');
+            when dig8=5 then set ans=concat(ans, ' पाँच करोड');
+            when dig8=6 then set ans=concat(ans, ' छ करोड');
+            when dig8=7 then set ans=concat(ans, ' सात  करोड');
+            when dig8=8 then set ans=concat(ans, ' आठ करोड');
+            when dig8=9 then set ans=concat(ans, ' नौ  करोड');
+            else set ans = ans;
+        end case;
+    end if;    
+      
+            
+   
+
+
 if dig7 >= 1 and dig6<>0 then
         case
             when (dig7*10 + dig6) = 10 then set ans=concat(ans,' दस लाख');
@@ -416,7 +436,5 @@ end if;
     end if;
 
     return trim(ans);
-    END$$
+    END
 DELIMITER ;
--- GRANT EXECUTE ON function your_db.number_to_string TO 'youruser'@'localhost';
--- SET GLOBAL log_bin_trust_function_creators = 1;
